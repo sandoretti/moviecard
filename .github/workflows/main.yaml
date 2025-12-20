@@ -52,11 +52,6 @@ jobs:
     runs-on: self-hosted
     continue-on-error: true
     steps:
-      - name: Aprobación manual
-        uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ secrets.TOKEN }}
-          approvers: sandoretti
       - name: Descargar repositorio
         uses: actions/checkout@v2
       - name: Instalar JDK 11
@@ -75,6 +70,11 @@ jobs:
     needs: qa
     if: github.ref=='refs/heads/main'
     steps:
+      - name: Aprobación manual
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ secrets.TOKEN }}
+          approvers: sandoretti
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
