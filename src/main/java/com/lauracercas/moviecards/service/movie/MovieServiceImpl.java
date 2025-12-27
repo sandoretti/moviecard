@@ -17,8 +17,8 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    private final RestTemplate template;
     private final static String MOVIES_ENDPOINT = "/movies";
+    private final RestTemplate template;
 
     @Value("${moviecards.url}")
     private String url;
