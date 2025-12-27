@@ -18,6 +18,7 @@ import java.util.List;
 public class ActorServiceImpl implements ActorService {
 
     private final RestTemplate template;
+    private final String ACTORS_ENDPOINT = "/actors";
 
     @Value("${moviecards.url}")
     private String url;
@@ -28,23 +29,23 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public List<Actor> getAllActors() {
-        Actor[] actores = template.getForObject(url + "/actors", Actor[].class);
+        Actor[] actores = template.getForObject(url + ACTORS_ENDPOINT, Actor[].class);
         return Arrays.asList(actores);
     }
 
     @Override
     public Actor save(Actor actor) {
         if (actor.getId() != null && actor.getId() > 0) {
-            template.put(url + "/actors", actor);
+            template.put(url + ACTORS_ENDPOINT, actor);
         } else {
             actor.setId(0);
-            template.postForObject(url + "/actors", actor, String.class);
+            template.postForObject(url + ACTORS_ENDPOINT, actor, String.class);
         }
         return actor;
     }
 
     @Override
     public Actor getActorById(Integer actorId) {
-        return template.getForObject(url + "/actors/" + actorId, Actor.class);
+        return template.getForObject(url + ACTORS_ENDPOINT + "/" + actorId, Actor.class);
     }
 }
