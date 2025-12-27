@@ -18,6 +18,7 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService {
 
     private final RestTemplate template;
+    private final String MOVIES_ENDPOINT = "/movies";
 
     @Value("${moviecards.url}")
     private String url;
@@ -29,24 +30,23 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getAllMovies() {
-        Movie[] movies = template.getForObject(url + "/movies", Movie[].class);
+        Movie[] movies = template.getForObject(url + MOVIES_ENDPOINT, Movie[].class);
         return Arrays.asList(movies);
     }
 
     @Override
     public Movie save(Movie movie) {
         if (movie.getId() != null && movie.getId() > 0) {
-            template.put(url + "/movies", movie);
+            template.put(url + MOVIES_ENDPOINT, movie);
         } else {
             movie.setId(0);
-            template.postForObject(url + "/movies", movie, String.class);
+            template.postForObject(url + MOVIES_ENDPOINT, movie, String.class);
         }
         return movie;
     }
 
     @Override
     public Movie getMovieById(Integer movieId) {
-        Movie movie = template.getForObject(url + "/movies/" + movieId, Movie.class);
-        return movie;
+        return template.getForObject(url + MOVIES_ENDPOINT + "/" + movieId, Movie.class);
     }
 }
