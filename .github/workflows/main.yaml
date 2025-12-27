@@ -24,6 +24,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      MOVIECARDS_SERVICE_URL: ${{ vars.MOVIECARDS_SERVICE_URL }}
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v2
