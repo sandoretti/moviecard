@@ -18,7 +18,7 @@ import java.util.List;
 public class ActorServiceImpl implements ActorService {
 
     private final RestTemplate template;
-    private final String ACTORS_ENDPOINT = "/actors";
+    private final static String ACTORS_ENDPOINT = "/actors";
 
     @Value("${moviecards.url}")
     private String url;
