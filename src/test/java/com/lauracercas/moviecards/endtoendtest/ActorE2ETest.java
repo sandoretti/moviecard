@@ -9,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.lauracercas.moviecards.util.Messages.NEW_ACTOR_TITLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -63,8 +61,7 @@ public class ActorE2ETest {
     @Test
     public void testListActors() {
         driver.get("http://localhost:8089/actors");
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement title = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("card-header")));
+        WebElement title = driver.findElement(By.className("card-header"));
         assertEquals("Listado Actores", title.getText());
 
         WebElement table = driver.findElement(By.className("table-hover"));
