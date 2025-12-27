@@ -25,6 +25,9 @@ public class Actor {
     @JsonIgnoreProperties("actors")
     private List<Movie> movies;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date deadDate;
+
     public Actor() {
     }
 
@@ -73,16 +76,28 @@ public class Actor {
         this.movies = movies;
     }
 
+    public Date getDeadDate() {
+        return deadDate;
+    }
+
+    public void setDeadDate(Date deadDate) {
+        this.deadDate = deadDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Actor actor = (Actor) o;
-        return Objects.equals(id, actor.id) && Objects.equals(name, actor.name) && Objects.equals(birthDate, actor.birthDate) && Objects.equals(country, actor.country);
+        return Objects.equals(id, actor.id) &&
+                Objects.equals(name, actor.name) &&
+                Objects.equals(birthDate, actor.birthDate) &&
+                Objects.equals(country, actor.country) &&
+                Objects.equals(deadDate, actor.deadDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, birthDate, country);
+        return Objects.hash(id, name, birthDate, country, deadDate);
     }
 }
