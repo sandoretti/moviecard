@@ -52,7 +52,6 @@ jobs:
   qa:
     needs: test
     runs-on: self-hosted
-    continue-on-error: true
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v2
